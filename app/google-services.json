@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "616071805326",
+    "project_id": "dariolopez-p2-1",
+    "storage_bucket": "dariolopez-p2-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616071805326:android:1e4948634d8ad2f8398cdf",
+        "android_client_info": {
+          "package_name": "com.dariolopez.dariolopez_p2_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616071805326-qe1hrvvosusmh5dm2fm7j5lurlqjb2j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB0O5su4_d0WNhgxtyt90bIX_wSWn1Rok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616071805326-qe1hrvvosusmh5dm2fm7j5lurlqjb2j5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
