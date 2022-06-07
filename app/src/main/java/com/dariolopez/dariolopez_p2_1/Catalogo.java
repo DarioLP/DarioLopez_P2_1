@@ -47,10 +47,9 @@ public class Catalogo extends AppCompatActivity {
     private ImageButton mButtonSpeesh;
 
 
-    //RecyclerView rvProductList;
 
     //inicio realtime
-    private TextView tvCodigo,tvNombre,tvPrecio,tvDescripcion;
+    private TextView tvCodigo,tvNombre,tvPrecio,tvDescripcion,tvNoEncontrado;
     private DatabaseReference mDatabase;
     //fin realtime
     //inicio Storage
@@ -65,8 +64,6 @@ public class Catalogo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogo);
 
-        //rvProductList = findViewById(R.id.rvProductList);
-        //rvProductList.setLayoutManager(new LinearLayoutManager(this));
 
         mEntradaVoz=findViewById(R.id.tvSpeechText1);
         mButtonSpeesh=findViewById(R.id.btnSpeech);
@@ -85,186 +82,13 @@ public class Catalogo extends AppCompatActivity {
         tvPrecio = findViewById(R.id.stvPrecio);
         tvDescripcion = findViewById(R.id.stvDescripcion);
         //inicio realtime
-
+        tvNoEncontrado = findViewById(R.id.tvNoEncontrado);
         tvCodigo=findViewById(R.id.stvCodigo);
         mDatabase = FirebaseDatabase.getInstance().getReference("productos");
-/*
-        //inicio Storage
-        //imgProducto = findViewById(R.id.imageView);
-
-        String imgCode = "productos/"+tvCodigo.getText().toString()+".jpeg";
-Toast.makeText(this,""+imgCode,Toast.LENGTH_SHORT).show();
-        mDataStorage = FirebaseStorage.getInstance().getReference("productos/0039")/*.child("gs://dariolopez-p2-1.appspot.com/productos/")*;
-
-
-        progressDialog = new ProgressDialog(this);
-        //fin Storage
-
-        String audioText = mEntradaVoz.getText().toString();
-        Toast.makeText(this,""+audioText,Toast.LENGTH_SHORT).show();
-
-
-Toast.makeText(this,""+audioText,Toast.LENGTH_SHORT).show();
-
-            mDatabase.child("productos/Mouse gamer"/*+audioText*).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-
-                    String codigo = snapshot.child("codigo").getValue().toString();
-                    tvCodigo.setText("Código: "+codigo);
-
-                    String nombre = snapshot.child("nombre").getValue().toString();
-                    tvNombre.setText(nombre);
-
-                    String precio = snapshot.child("precio").getValue().toString();
-                    tvPrecio.setText("$/."+precio);
-
-                    String descripcion = snapshot.child("descripcion").getValue().toString();
-                    tvDescripcion.setText("Descripción: "+descripcion);
-
-                    mostrarImagen();
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-Toast.makeText(Catalogo.this,"Error: "+error,Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-
-
-        //fin realtime
-*/
 
     }
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-
-        //inicio Storage
-        //imgProducto = findViewById(R.id.imageView);
-
-
-
-        progressDialog = new ProgressDialog(this);
-        //fin Storage
-
-        String audioText = mEntradaVoz.getText().toString();
-        linearContainer = findViewById(R.id.linearContainerProducto);
-        if (audioText.isEmpty()){
-            Toast.makeText(this,"busque algun producto",Toast.LENGTH_SHORT).show();
-
-            linearContainer.setEnabled(false);
-
-        }else {
-
-linearContainer.setEnabled(true);
-
-            Toast.makeText(this, "" + audioText, Toast.LENGTH_SHORT).show();
-
-            mDatabase.child("productos/" + audioText/*"productos/Mouse gamer"*//*+audioText*/).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-
-                        String codigo = snapshot.child("codigo").getValue().toString();
-                        tvCodigo.setText("Código: " + codigo);
-
-                        String nombre = snapshot.child("nombre").getValue().toString();
-                        tvNombre.setText(nombre);
-
-                        String precio = snapshot.child("precio").getValue().toString();
-                        tvPrecio.setText("$/." + precio);
-
-                        String descripcion = snapshot.child("descripcion").getValue().toString();
-                        tvDescripcion.setText("" + descripcion);
-
-
-                        mDataStorage = FirebaseStorage.getInstance().getReference("productos/" + codigo)/*.child("gs://dariolopez-p2-1.appspot.com/productos/")*/;
-
-//inicio storage
-                        try {
-                            final File localFile = File.createTempFile(/*"0039"*/"" + codigo, "png"/*"jpeg"*/);
-                            mDataStorage.getFile(localFile)
-                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                            Toast.makeText(Catalogo.this, "Picture Retrieved", Toast.LENGTH_SHORT).show();
-                                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                                            ((ImageView) findViewById(R.id.imgProduct)).setImageBitmap(bitmap);
-
-                                            // imgProducto.setImageBitmap(bitmap);
-                                        }
-
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(Catalogo.this, "Error Ocurred" + e, Toast.LENGTH_SHORT).show();
-                                }
-
-                            });
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-//fin Storage
-                        // mostrarImagen();
-
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(Catalogo.this, "Error: " + error, Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
-            //fin realtime
-        }
-
-
-
-    }
-/*
-    //inicio Storage
-private void mostrarImagen(){
-    try {
-        final File localFile = File.createTempFile("0039","jpeg");
-        mDataStorage.getFile(localFile)
-                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>(){
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot){
-                        Toast.makeText(Catalogo.this,"Picture Retrieved",Toast.LENGTH_SHORT).show();
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        ((ImageView)findViewById(R.id.imgProduct)).setImageBitmap(bitmap);
-
-                        // imgProducto.setImageBitmap(bitmap);
-                    }
-
-                }).addOnFailureListener(new OnFailureListener(){
-            @Override
-            public void onFailure(@NonNull Exception e){
-                Toast.makeText(Catalogo.this,"Error Ocurred"+e,Toast.LENGTH_SHORT).show();
-            }
-
-        });
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    }
-//fin Storage
-*/
     private void iniciarEntradaVoz(){
         Intent intent= new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -292,6 +116,115 @@ private void mostrarImagen(){
 
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+        //inicio Storage
+
+        progressDialog = new ProgressDialog(this);
+        //fin Storage
+
+        String audioText = mEntradaVoz.getText().toString();
+        linearContainer = findViewById(R.id.linearContainerProducto);
+        if (audioText.isEmpty()){
+            Toast.makeText(this,"busque algun producto",Toast.LENGTH_SHORT).show();
+
+            desLinearActTextView();
+
+        }else {
+
+            actLinearDesTextView();
+            Toast.makeText(this, "" + audioText, Toast.LENGTH_SHORT).show();
+
+            mDatabase.child("productos/" + audioText/*"productos/Mouse gamer"*//*+audioText*/).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+
+                        String codigo = snapshot.child("codigo").getValue().toString();
+                        tvCodigo.setText("Código: " + codigo);
+
+                        String nombre = snapshot.child("nombre").getValue().toString();
+                        tvNombre.setText(nombre);
+
+                        String precio = snapshot.child("precio").getValue().toString();
+                        tvPrecio.setText("$" + precio);
+
+                        String descripcion = snapshot.child("descripcion").getValue().toString();
+                        tvDescripcion.setText("" + descripcion);
+
+
+
+
+                        mDataStorage = FirebaseStorage.getInstance().getReference("productos/" + codigo)/*.child("gs://dariolopez-p2-1.appspot.com/productos/")*/;
+
+//inicio storage
+                        try {
+                            final File localFile = File.createTempFile(/*"0039"*/"" + codigo, "png"/*"jpeg"*/);
+                            mDataStorage.getFile(localFile)
+                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                            Toast.makeText(Catalogo.this, "Picture Retrieved", Toast.LENGTH_SHORT).show();
+                                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                            ((ImageView) findViewById(R.id.imgProduct)).setImageBitmap(bitmap);
+
+                                        }
+
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(Catalogo.this, "Error Ocurred" + e, Toast.LENGTH_SHORT).show();
+                                    desLinearActTextView();
+                                }
+
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+//fin Storage
+                        // mostrarImagen();
+
+                    }
+
+                    else{
+                        desLinearActTextView();
+                    }
+
+
+                    //crear un else if
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(Catalogo.this, "Error: " + error, Toast.LENGTH_SHORT).show();
+                    desLinearActTextView();
+                }
+            });
+
+
+
+
+            //fin realtime
+        }
+
+
+
+    }
+
+    private void desLinearActTextView(){
+        linearContainer.setVisibility(View.GONE);
+        tvNoEncontrado.setVisibility(View.VISIBLE);
+    }
+
+    private void actLinearDesTextView(){
+        linearContainer.setVisibility(View.VISIBLE);
+        tvNoEncontrado.setVisibility(View.GONE);
     }
 
 

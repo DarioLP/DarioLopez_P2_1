@@ -11,7 +11,7 @@
         android:id="@+id/txtCodigo"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:text="Código de producto"
+        android:text="Nombre del producto"
         android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/etCodigo"
         app:layout_constraintEnd_toEndOf="parent"
