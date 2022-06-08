@@ -55,7 +55,7 @@ public class Agregar extends AppCompatActivity {
         //fin firebase
 
         //inicio storage
-        mUploadImageView = findViewById(R.id.ivUpload);
+      //  mUploadImageView = findViewById(R.id.ivUpload);
 /*
         if(codigo.getText().toString().isEmpty()||nombre.getText().toString().isEmpty()||precio.getText().toString().isEmpty()||descripcion.getText().toString().isEmpty()) {
             Toast.makeText(this,"Rellene todos los campos...",Toast.LENGTH_SHORT).show();
