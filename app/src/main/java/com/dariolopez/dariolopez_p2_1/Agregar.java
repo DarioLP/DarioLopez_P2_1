@@ -2,9 +2,11 @@ package com.dariolopez.dariolopez_p2_1;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -148,15 +150,42 @@ try {
         if(aCodigo.isEmpty()||aNombre.isEmpty()||aPrecio.isEmpty()||aDescripcion.isEmpty()){
             Toast.makeText(this, "Rellene todos los campos...", Toast.LENGTH_SHORT).show();
         }else{
-            //String id = productos.push().getKey();
-            Productos producto = new Productos(/*id,*/aCodigo,aNombre,aPrecio,aDescripcion);
-            productos.child("productos").child(nombre.getText().toString()/*id*//*aCodigo*/).setValue(producto);
-            Toast.makeText(this, "Registrado...", Toast.LENGTH_SHORT).show();
-            try {
-                fileUpload();
-            }catch (Exception e){
-                Toast.makeText(this,"Error: "+ e,Toast.LENGTH_SHORT).show();
-            }
+
+
+
+            AlertDialog.Builder exit = new AlertDialog.Builder(Agregar.this);
+            exit.setMessage("Desea Agregar el producto?")
+                    .setCancelable(false)
+                    .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            //String id = productos.push().getKey();
+                            Productos producto = new Productos(/*id,*/aCodigo,aNombre,aPrecio,aDescripcion);
+                            productos.child("productos").child(nombre.getText().toString()/*id*//*aCodigo*/).setValue(producto);
+                            Toast.makeText(Agregar.this, "Registrado...", Toast.LENGTH_SHORT).show();
+                            try {
+                                fileUpload();
+                            }catch (Exception e){
+                                Toast.makeText(Agregar.this,"Error: "+ e,Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog titulo = exit.create();
+            titulo.setTitle("Agregar Producto");
+            titulo.show();
+
+
+
+
 
         }
 

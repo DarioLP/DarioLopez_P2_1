@@ -120,7 +120,7 @@ public class Modificar extends AppCompatActivity {
         }else{
 
             AlertDialog.Builder exit = new AlertDialog.Builder(Modificar.this);
-            exit.setMessage("Desea modificar la imformación de este producto?")
+            exit.setMessage("Desea modificar la información de este producto?")
                     .setCancelable(false)
                     .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                         @Override

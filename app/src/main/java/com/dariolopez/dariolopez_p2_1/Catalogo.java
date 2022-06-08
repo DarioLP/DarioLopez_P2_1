@@ -178,7 +178,7 @@ consultaDeProductos();
                                     .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                         @Override
                                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                            Toast.makeText(Catalogo.this, "Picture Retrieved", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Catalogo.this, "Imagen Cargada", Toast.LENGTH_SHORT).show();
                                             Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                                             ((ImageView) findViewById(R.id.imgProduct)).setImageBitmap(bitmap);
 
@@ -187,7 +187,7 @@ consultaDeProductos();
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(Catalogo.this, "Error Ocurred" + e, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Catalogo.this, "Error: " + e, Toast.LENGTH_SHORT).show();
                                     desLinearActTextView();
                                 }
 

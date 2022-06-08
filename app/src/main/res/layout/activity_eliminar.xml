@@ -6,13 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Eliminar">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/shopback"
+        android:tint="#D0FFFFFF" />
 
     <TextView
         android:id="@+id/txtCodigo"
-        android:layout_width="130dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Nombre del producto"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/etCodigo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
