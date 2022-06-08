@@ -122,6 +122,14 @@ public class Catalogo extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+consultaDeProductos();
+
+
+    }
+
+
+    private void consultaDeProductos(){
+
 
 
         //inicio Storage
@@ -214,8 +222,11 @@ public class Catalogo extends AppCompatActivity {
         }
 
 
-
     }
+
+
+
+
 
     private void desLinearActTextView(){
         linearContainer.setVisibility(View.GONE);
